@@ -80,7 +80,7 @@ nav {
 
 /* Add a fire emoji before the logo for a playful touch */
 .logo::before {
-  content: '🔥'; /* Fire emoji */
+  content: ''; /* Fire emoji */
   margin-right: 8px; /* Space between emoji and logo text */
 }
 
