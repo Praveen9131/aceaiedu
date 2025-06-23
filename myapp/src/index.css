@@ -2,7 +2,9 @@
    GLOBAL STYLES
    ========================================================================== */
 
+/
 /* Reset default margins, paddings, and set box-sizing to border-box for consistent layout */
+
 * {
   margin: 0;
   padding: 0;
