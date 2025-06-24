@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore AceAI's online courses in DevOps, MLOps, Generative AI, Agents AI, Python, Frontend Development, Backend Development, Machine Learning, and Complete AI Master Class with prices and plans.">
+  <meta name="keywords" content="DevOps, MLOps, Generative AI, Agents AI, Python, Frontend Development, Backend Development, Machine Learning, Complete AI Master Class, online courses">
+  <meta name="author" content="AceAI">
+  <title>AceAI - Online Courses</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Reset and Base Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #f5f5f5;
+      color: #1a1a2e;
+      line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Background Animation */
+    .background-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+    .particle {
+      position: absolute;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(168, 85, 247, 0.3));
+      border-radius: 50%;
+      animation: floatAndExpand 8s infinite linear;
+    }
+    .particle:nth-child(1) { width: 10px; height: 10px; top: 10%; left: 15%; animation-delay: 0s; }
+    .particle:nth-child(2) { width: 15px; height: 15px; top: 25%; left: 30%; animation-delay: 2s; }
+    .particle:nth-child(3) { width: 8px; height: 8px; top: 40%; left: 70%; animation-delay: 4s; }
+    .particle:nth-child(4) { width: 12px; height: 12px; top: 60%; left: 20%; animation-delay: 6s; }
+    .particle:nth-child(5) { width: 7px; height: 7px; top: 80%; left: 50%; animation-delay: 8s; }
+    @keyframes floatAndExpand {
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.5; }
+      50% { transform: translateY(-50px) scale(1.3); opacity: 0.8; }
+    }
+
+    /* Top Banner */
+    .top-banner {
+      background: linear-gradient(135deg, #8B5CF6, #A855F7);
+      color: white;
+      padding: 15px 20px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 500;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .top-banner:hover {
+      background: linear-gradient(135deg, #7C3AED, #9333EA);
+      transform: scale(1.02);
+    }
+    .top-banner::after {
+      content: '→';
+      margin-left: 15px;
+      transition: transform 0.3s ease;
+    }
+    .top-banner:hover::after {
+      transform: translateX(5px);
+    }
+
+    /* Navigation */
+    nav {
+      background: white;
+      padding: 16px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      font-size: 24px;
+      font-weight: 700;
+      color: #8B5CF6;
+    }
+    .logo::before {
+      content: '🔥';
+      margin-right: 8px;
+    }
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 32px;
+      align-items: center;
+    }
+    .nav-links a {
+      color: #1a1a2e;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+    .nav-links a:hover, .nav-links a.active {
+      color: #8B5CF6;
+    }
+    .nav-buttons {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .btn-primary {
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #8B5CF6, #A855F7);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 10px rgba(139, 92, 246, 0.3);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(139, 92, 246, 0.4);
+      background: linear-gradient(135deg, #7C3AED, #9333EA);
+    }
+    .hamburger {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      background: linear-gradient(135deg, #1a1a2e, #16213e 50%, #0f3460);
+      color: white;
+      padding: 100px 40px;
+      position: relative;
+      overflow: hidden;
+      min-height: 600px;
+      display: flex;
+      align-items: center;
+    }
+    .hero-shapes {
+      position: absolute;
+      right: -150px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 600px;
+      height: 500px;
+      opacity: 0.7;
+    }
+    .shape-3d {
+      position: absolute;
+      border-radius: 50%;
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(168, 85, 247, 0.5));
+      animation: float3d 18s ease-in-out infinite;
+    }
+    .shape-3d:nth-child(1) { width: 180px; height: 180px; top: 10%; right: 15%; }
+    .shape-3d:nth-child(2) { width: 140px; height: 140px; top: 30%; right: 35%; animation-delay: -4s; }
+    .shape-3d:nth-child(3) { width: 160px; height: 160px; top: 50%; right: 10%; animation-delay: -8s; }
+    .shape-3d:nth-child(4) { width: 110px; height: 110px; top: 70%; right: 25%; animation-delay: -12s; }
+    @keyframes float3d {
+      0%, 100% { transform: translateY(0) rotateX(0deg) rotateY(0deg); opacity: 0.7; }
+      50% { transform: translateY(-40px) rotateX(20deg) rotateY(20deg); opacity: 1; }
+    }
+    .hero-content {
+      max-width: 700px;
+      z-index: 2;
+      position: relative;
+      animation: fadeInLeft 1s ease-out;
+    }
+    @keyframes fadeInLeft {
+      0% { opacity: 0; transform: translateX(-50px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    .hero-section h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      line-height: 1.2;
+    }
+    .hero-section p {
+      font-size: 1.25rem;
+      margin-bottom: 32px;
+      color: rgba(255, 255, 255, 0.85);
+    }
+    .hero-cta {
+      display: inline-block;
+      padding: 14px 28px;
+      background: linear-gradient(135deg, #8B5CF6, #A855F7);
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
+    }
+    .hero-cta:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(139, 92, 246, 0.4);
+      background: linear-gradient(135deg, #7C3AED, #9333EA);
+    }
+
+    /* Courses Section */
+    .courses-section {
+      padding: 80px 40px;
+      background: white;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .courses-section h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #1a1a2e;
+      margin-bottom: 16px;
+    }
+    .courses-section p {
+      font-size: 1.1rem;
+      color: #64748b;
+      max-width: 800px;
+      margin: 0 auto 40px;
+    }
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .course-card {
+      background: rgba(139, 92, 246, 0.05);
+      border: 2px solid #8B5CF6;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: left;
+      opacity: 0;
+      transform: scale(0.95);
+      animation: cardFadeIn 0.6s ease-out forwards;
+      height: 100%; /* Ensure full height */
+      display: flex;
+      flex-direction: column;
+    }
+    .course-card:nth-child(1) { animation-delay: 0.1s; }
+    .course-card:nth-child(2) { animation-delay: 0.2s; }
+    .course-card:nth-child(3) { animation-delay: 0.3s; }
+    .course-card:nth-child(4) { animation-delay: 0.4s; }
+    .course-card:nth-child(5) { animation-delay: 0.5s; }
+    .course-card:nth-child(6) { animation-delay: 0.6s; }
+    .course-card:nth-child(7) { animation-delay: 0.7s; }
+    .course-card:nth-child(8) { animation-delay: 0.8s; }
+    .course-card:nth-child(9) { animation-delay: 0.9s; }
+    @keyframes cardFadeIn {
+      to { opacity: 1; transform: scale(1); }
+    }
+    .course-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(139, 92, 246, 0.2);
+    }
+    .course-image {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      border-radius: 8px 8px 0 0; /* Round only top corners */
+      display: block;
+    }
+    .course-content {
+      padding: 24px; /* Moved padding here */
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .course-card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin-bottom: 12px;
+    }
+    .course-card p {
+      font-size: 0.95rem;
+      color: #64748b;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .course-price {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #8B5CF6;
+      margin-bottom: 20px;
+    }
+    .course-buttons {
+      display: flex;
+      gap: 16px;
+      margin-top: auto; /* Push buttons to bottom */
+    }
+    .course-plan-button, .enroll-now-button {
+      display: inline-block;
+      padding: 10px 20px;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      text-align: center;
+      flex: 1;
+    }
+    .course-plan-button {
+      background: white;
+      border: 1px solid #8B5CF6;
+      color: #8B5CF6;
+    }
+    .course-plan-button:hover {
+      background: #8B5CF6;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+    }
+    .enroll-now-button {
+      background: linear-gradient(135deg, #8B5CF6, #A855F7);
+      color: white;
+      border: none;
+    }
+    .enroll-now-button:hover {
+      background: linear-gradient(135deg, #7C3AED, #9333EA);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+    }
+
+    /* Footer */
+    footer {
+      background: #1a1a2e;
+      color: white;
+      padding: 60px 40px 20px;
+    }
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    .footer-section h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #8B5CF6;
+      margin-bottom: 16px;
+    }
+    .footer-section ul {
+      list-style: none;
+    }
+    .footer-section ul li {
+      margin-bottom: 8px;
+    }
+    .footer-section ul li a {
+      color: #94a3b8;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .footer-section ul li a:hover {
+      color: white;
+    }
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 20px;
+      text-align: center;
+      color: #94a3b8;
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .nav-links.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: white;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 999;
+      }
+      .hamburger {
+        display: block;
+      }
+      .hero-section h1 {
+        font-size: 2.5rem;
+      }
+      .hero-section p {
+        font-size: 1rem;
+      }
+      .course-grid {
+        grid-template-columns: 1fr;
+      }
+      .courses-section {
+        padding: 40px 20px;
+      }
+      .course-buttons {
+        flex-direction: column;
+        gap: 12px;
+      }
+      .course-image {
+        height: 150px;
+      }
+    }
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .course-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .course-card {
+        min-width: 280px;
+      }
+      .course-image {
+        height: 160px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Background Animation -->
+  <div class="background-animation">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+  </div>
+
+  <!-- Top Banner -->
+  <div class="top-banner">
+    🚀 Enroll in AceAI’s Courses Today and Start Your Journey to Mastery
+  </div>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="logo">
+      <span role="img" aria-label="Rocket">🚀</span> AceAI
+    </div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="courses.html" class="active">Courses</a></li>
+      <li><a href="internships.html">Internships</a></li>
+    </ul>
+    <div class="nav-buttons">
+      <a href="#courses" class="btn-primary">Explore Courses</a>
+    </div>
+    <div class="hamburger">☰</div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-shapes">
+      <div class="shape-3d"></div>
+      <div class="shape-3d"></div>
+      <div class="shape-3d"></div>
+      <div class="shape-3d"></div>
+    </div>
+    <div class="hero-content">
+      <h1>Master Technology with AceAI</h1>
+      <p>Unlock your potential with our industry-leading courses in DevOps, MLOps, AI, Python, Frontend Development, Backend Development, Machine Learning, and Complete AI Master Class.</p>
+      <a href="#courses" class="hero-cta">Explore Courses</a>
+    </div>
+  </section>
+
+  <!-- Courses Section -->
+<section id="courses" class="courses-section">
+  <h2>Our Courses</h2>
+  <p>Discover our expertly crafted courses in DevOps, MLOps, AI, Python, Frontend Development, Backend Development, Machine Learning, and Complete AI Master Class with clear pricing and detailed plans.</p>
+  <div class="course-grid">
+    <div class="course-card">
+      <img src="images/ChatGPT Image Jun 24, 2025, 11_00_12 AM.png" alt="Python" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=Python';">
+      <div class="course-content">
+        <div>
+          <h3>Python</h3>
+          <p>Master Python programming, covering fundamentals, data analysis, and AI libraries like TensorFlow and PyTorch.</p>
+          <div class="course-price">$449</div>
+        </div>
+        <div class="course-buttons">
+          <a href="course-plan.html?id=5" class="course-plan-button">Course Plan</a>
+          <a href="enroll.html?id=5" class="enroll-now-button">Enroll Now</a>
+        </div>
+      </div>
+    </div>
+    <div class="course-card">
+      <img src="/images/machine-learning.jpg" alt="Machine Learning" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=Machine+Learning';">
+      <div class="course-content">
+        <div>
+          <h3>Machine Learning</h3>
+          <p>Explore algorithms, neural networks, and data modeling techniques to build predictive systems with tools like Scikit-learn and Keras.</p>
+          <div class="course-price">$599</div>
+        </div>
+        <div class="course-buttons">
+          <a href="course-plan.html?id=8" class="course-plan-button">Course Plan</a>
+          <a href="enroll.html?id=8" class="enroll-now-button">Enroll Now</a>
+        </div>
+      </div>
+    </div>
+    <div class="course-card">
+      <img src="images/ChatGPT Image May 11, 2025, 12_33_32 PM.png" alt="Complete AI Master Class" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=Complete+AI+Master+Class';">
+      <div class="course-content">
+        <div>
+          <h3>Complete AI Master Class</h3>
+          <p>A comprehensive course covering AI fundamentals, machine learning, generative AI, and agentic systems for a holistic AI education.</p>
+          <div class="course-price">$799</div>
+        </div>
+        <div class="course-buttons">
+          <a href="course-plan.html?id=9" class="course-plan-button">Course Plan</a>
+          <a href="enroll.html?id=9" class="enroll-now-button">Enroll Now</a>
+        </div>
+      </div>
+    </div>
+    <div class="course-card">
+      <img src="images/ChatGPT Image May 11, 2025, 12_16_24 PM.png" alt="Generative AI" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=Generative+AI';">
+      <div class="course-content">
+        <div>
+          <h3>Generative AI</h3>
+          <p>Build advanced generative models like GANs and LLMs to create innovative AI applications for creative industries.</p>
+          <div class="course-price">$649</div>
+        </div>
+        <div class="course-buttons">
+          <a href="course-plan.html?id=3" class="course-plan-button">Course Plan</a>
+          <a href="enroll.html?id=3" class="enroll-now-button">Enroll Now</a>
+        </div>
+      </div>
+    </div>
+    <div class="course-card">
+      <img src="images/agent.avif" alt="Agents AI" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=Agents+AI';">
+      <div class="course-content">
+        <div>
+          <h3>Agents AI</h3>
+          <p>Develop intelligent AI agents capable of autonomous decision-making and task automation.</p>
+          <div class="course-price">$579</div>
+        </div>
+        <div class="course-buttons">
+          <a href="course-plan.html?id=4" class="course-plan-button">Course Plan</a>
+          <a href="enroll.html?id=4" class="enroll-now-button">Enroll Now</a>
+        </div>
+      </div>
+    </div>
+    <div class="course-card">
+      <img src="images/ChatGPT Image Jun 24, 2025, 11_17_47 AM.png" alt="Frontend Development" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=Frontend+Development';">
+      <div class="course-content">
+        <div>
+          <h3>Frontend Development</h3>
+          <p>Design responsive, user-friendly web interfaces using modern frameworks like React, Vue.js, and Angular.</p>
+          <div class="course-price">$529</div>
+        </div>
+        <div class="course-buttons">
+          <a href="course-plan.html?id=6" class="course-plan-button">Course Plan</a>
+          <a href="enroll.html?id=6" class="enroll-now-button">Enroll Now</a>
+        </div>
+      </div>
+    </div>
+    <div class="course-card">
+      <img src="images/ChatGPT Image Jun 24, 2025, 11_25_58 AM.png" alt="Backend Development" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=Backend+Development';">
+      <div class="course-content">
+        <div>
+          <h3>Backend Development</h3>
+          <p>Develop scalable backend systems with Node.js, Django, and databases like MongoDB and PostgreSQL.</p>
+          <div class="course-price">$569</div>
+        </div>
+        <div class="course-buttons">
+          <a href="course-plan.html?id=7" class="course-plan-button">Course Plan</a>
+          <a href="enroll.html?id=7" class="enroll-now-button">Enroll Now</a>
+        </div>
+      </div>
+    </div>
+    <div class="course-card">
+      <img src="images/ChatGPT Image May 11, 2025, 12_43_26 PM.png" alt="MLOps" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=MLOps';">
+      <div class="course-content">
+        <div>
+          <h3>MLOps</h3>
+          <p>Learn to deploy and manage machine learning models at scale using MLOps tools and best practices.</p>
+          <div class="course-price">$599</div>
+        </div>
+        <div class="course-buttons">
+          <a href="course-plan.html?id=2" class="course-plan-button">Course Plan</a>
+          <a href="enroll.html?id=2" class="enroll-now-button">Enroll Now</a>
+        </div>
+      </div>
+    </div>
+    <div class="course-card">
+      <img src="images/dev.jpg" alt="DevOps" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=DevOps';">
+      <div class="course-content">
+        <div>
+          <h3>DevOps</h3>
+          <p>Master DevOps practices, including CI/CD pipelines, containerization with Docker, and orchestration with Kubernetes.</p>
+          <div class="course-price">$549</div>
+        </div>
+        <div class="course-buttons">
+          <a href="course-plan.html?id=1" class="course-plan-button">Course Plan</a>
+          <a href="enroll.html?id=1" class="enroll-now-button">Enroll Now</a>
+        </div>
+      </div>
+    </div>
+    <div class="course-card">
+      <img src="images/cloud.jpg" alt="Cloud Computing" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=Cloud+Computing';">
+      <div class="course-content">
+        <div>
+          <h3>Cloud Computing</h3>
+          <p>Learn cloud architecture, deployment, and management using AWS, Azure, and Google Cloud with hands-on projects.</p>
+          <div class="course-price">$629</div>
+        </div>
+        <div class="course-buttons">
+          <a href="course-plan.html?id=10" class="course-plan-button">Course Plan</a>
+          <a href="enroll.html?id=10" class="enroll-now-button">Enroll Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>AceAI</h3>
+        <p>Empowering professionals and students with world-class technology education and practical experience.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Explore</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="courses.html">Courses</a></li>
+          <li><a href="internships.html">Internships</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="terms.html">Terms of Service</a></li>
+          <li><a href="cookies.html">Cookie Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <ul>
+          <li><a href="mailto:info@aceai.com">info@aceai.com</a></li>
+          <li><a href="tel:+919121564760">+91 9121564760</a></li>
+          <li>Chennai, Tamil Nadu, India</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2025 AceAI. All rights reserved.
+    </div>
+  </footer>
+
+  <!-- JavaScript for Hamburger Menu -->
+  <script>
+    document.querySelector('.hamburger').addEventListener('click', () => {
+      document.querySelector('.nav-links').classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
