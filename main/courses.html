@@ -96,7 +96,7 @@
       color: #8B5CF6;
     }
     .logo::before {
-      content: '🔥';
+      content: '';
       margin-right: 8px;
     }
     .nav-links {
@@ -183,7 +183,7 @@
     }
     @keyframes fadeInLeft {
       0% { opacity: 0; transform: translateX(-50px); }
-      100% { opacity: 1; transform: translateX(0); }
+      100% { opacity: 1; translateX(0); }
     }
     .hero-section h1 {
       font-size: 3.5rem;
@@ -339,6 +339,82 @@
       box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
     }
 
+    /* Modal Styles */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: white;
+      padding: 32px;
+      border-radius: 12px;
+      max-width: 500px;
+      width: 90%;
+      position: relative;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      font-size: 24px;
+      cursor: pointer;
+      color: #64748b;
+    }
+    .modal h2 {
+      font-size: 1.75rem;
+      margin-bottom: 24px;
+      color: #1a1a2e;
+    }
+    .modal form {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .modal label {
+      font-size: 1rem;
+      color: #64748b;
+      font-weight: 500;
+    }
+    .modal input {
+      padding: 12px;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      font-size: 1rem;
+      width: 100%;
+    }
+    .modal button {
+      padding: 12px;
+      background: linear-gradient(135deg, #8B5CF6, #A855F7);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .modal button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(139, 92, 246, 0.3);
+    }
+    .modal .message {
+      margin-top: 16px;
+      font-size: 1rem;
+      color: #10b981;
+      display: none;
+    }
+    .modal .message.error {
+      color: #ef4444;
+    }
+
     /* Footer */
     footer {
       background: #1a1a2e;
@@ -380,8 +456,8 @@
       color: #94a3b8;
     }
 
-    /* Responsive Styles */
-    @media (max-width: 768px) {
+    /* Existing Responsive Styles */
+    @media screen and (max-width: 768px) {
       .nav-links {
         display: none;
       }
@@ -395,7 +471,10 @@
         background: white;
         padding: 20px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        z-index: 999;
+        z-index: 1;
+      }
+      .nav-buttons {
+        display: none; /* Added to hide the Explore Courses button */
       }
       .hamburger {
         display: block;
@@ -418,6 +497,13 @@
       }
       .course-image {
         height: 150px;
+      }
+      .modal-content {
+        padding: 24px;
+        max-width: 90vw;
+      }
+      .modal h2 {
+        font-size: 1.5rem;
       }
     }
     @media (min-width: 769px) and (max-width: 1024px) {
@@ -445,13 +531,13 @@
 
   <!-- Top Banner -->
   <div class="top-banner">
-    🚀 Enroll in AceAI’s Courses Today and Start Your Journey to Mastery
+     Enroll in AceAI’s Courses Today and Start Your Journey to Mastery
   </div>
 
   <!-- Navigation -->
   <nav>
     <div class="logo">
-      <span role="img" aria-label="Rocket">🚀</span> AceAI
+      <span role="img" aria-label="Rocket"></span> AceAI
     </div>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
@@ -475,157 +561,177 @@
     <div class="hero-content">
       <h1>Master Technology with AceAI</h1>
       <p>Unlock your potential with our industry-leading courses in DevOps, MLOps, AI, Python, Frontend Development, Backend Development, Machine Learning, and Complete AI Master Class.</p>
-      <a href="#courses" class="hero-cta">Explore Courses</a>
+      <!-- <a href="#courses" class="hero-cta">Explore Courses</a> -->
     </div>
   </section>
 
   <!-- Courses Section -->
-<section id="courses" class="courses-section">
-  <h2>Our Courses</h2>
-  <p>Discover our expertly crafted courses in DevOps, MLOps, AI, Python, Frontend Development, Backend Development, Machine Learning, and Complete AI Master Class with clear pricing and detailed plans.</p>
-  <div class="course-grid">
-    <div class="course-card">
-      <img src="images/ChatGPT Image Jun 24, 2025, 11_00_12 AM.png" alt="Python" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=Python';">
-      <div class="course-content">
-        <div>
-          <h3>Python</h3>
-          <p>Master Python programming, covering fundamentals, data analysis, and AI libraries like TensorFlow and PyTorch.</p>
-          <div class="course-price">$449</div>
+  <section id="courses" class="courses-section">
+    <h2>Our Courses</h2>
+    <p>Discover our expertly crafted courses in DevOps, MLOps, AI, Python, Frontend Development, Backend Development, Machine Learning, and Complete AI Master Class with clear pricing and detailed plans.</p>
+    <div class="course-grid">
+      <div class="course-card">
+        <img src="images/ChatGPT Image Jun 24, 2025, 11_00_12 AM.png" alt="Python" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=Python';">
+        <div class="course-content">
+          <div>
+            <h3>Python</h3>
+            <p>Master Python programming, covering fundamentals, data analysis, and AI libraries like TensorFlow and PyTorch.</p>
+            <div class="course-price">₹4500</div>
+          </div>
+          <div class="course-buttons">
+            <a href="course-plan.html?id=5" class="course-plan-button">Course Plan</a>
+            <a href="#" class="enroll-now-button">Enroll Now</a>
+          </div>
         </div>
-        <div class="course-buttons">
-          <a href="course-plan.html?id=5" class="course-plan-button">Course Plan</a>
-          <a href="enroll.html?id=5" class="enroll-now-button">Enroll Now</a>
+      </div>
+      <div class="course-card">
+        <img src="images/ChatGPT Image Jun 24, 2025, 11_51_12 AM.png" alt="Machine Learning" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=Machine+Learning';">
+        <div class="course-content">
+          <div>
+            <h3>Machine Learning</h3>
+            <p>Explore algorithms, neural networks, and data modeling techniques to build predictive systems with tools like Scikit-learn and Keras.</p>
+            <div class="course-price">₹4500</div>
+          </div>
+          <div class="course-buttons">
+            <a href="course-plan.html?id=8" class="course-plan-button">Course Plan</a>
+            <a href="#" class="enroll-now-button">Enroll Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="course-card">
+        <img src="images/ChatGPT Image May 11, 2025, 12_33_32 PM.png" alt="Complete AI Master Class" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=Complete+AI+Master+Class';">
+        <div class="course-content">
+          <div>
+            <h3>Complete AI Master Class</h3>
+            <p>A comprehensive course covering AI fundamentals, machine learning, generative AI, and agentic systems for a holistic AI education.</p>
+            <div class="course-price">₹12500</div>
+          </div>
+          <div class="course-buttons">
+            <a href="course-plan.html?id=9" class="course-plan-button">Course Plan</a>
+            <a href="#" class="enroll-now-button">Enroll Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="course-card">
+        <img src="images/ChatGPT Image May 11, 2025, 12_16_24 PM.png" alt="Generative AI" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=Generative+AI';">
+        <div class="course-content">
+          <div>
+            <h3>Generative AI</h3>
+            <p>Build advanced generative models like GANs and LLMs to create innovative AI applications for creative industries.</p>
+            <div class="course-price">₹5000</div>
+          </div>
+          <div class="course-buttons">
+            <a href="course-plan.html?id=3" class="course-plan-button">Course Plan</a>
+            <a href="#" class="enroll-now-button">Enroll Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="course-card">
+        <img src="images/agent.avif" alt="Agents AI" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=Agents+AI';">
+        <div class="course-content">
+          <div>
+            <h3>Agents AI</h3>
+            <p>Develop intelligent AI agents capable of autonomous decision-making and task automation.</p>
+            <div class="course-price">₹7000</div>
+          </div>
+          <div class="course-buttons">
+            <a href="course-plan.html?id=4" class="course-plan-button">Course Plan</a>
+            <a href="#" class="enroll-now-button">Enroll Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="course-card">
+        <img src="images/ChatGPT Image Jun 24, 2025, 11_17_47 AM.png" alt="Frontend Development" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=Frontend+Development';">
+        <div class="course-content">
+          <div>
+            <h3>Frontend Development</h3>
+            <p>Design responsive, user-friendly web interfaces using modern frameworks like React, Vue.js, and Angular.</p>
+            <div class="course-price">₹5000</div>
+          </div>
+          <div class="course-buttons">
+            <a href="course-plan.html?id=6" class="course-plan-button">Course Plan</a>
+            <a href="#" class="enroll-now-button">Enroll Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="course-card">
+        <img src="images/ChatGPT Image Jun 24, 2025, 11_25_58 AM.png" alt="Backend Development" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=Backend+Development';">
+        <div class="course-content">
+          <div>
+            <h3>Backend Development</h3>
+            <p>Develop scalable backend systems with Node.js, Django, and databases like MongoDB and PostgreSQL.</p>
+            <div class="course-price">₹6500</div>
+          </div>
+          <div class="course-buttons">
+            <a href="course-plan.html?id=7" class="course-plan-button">Course Plan</a>
+            <a href="#" class="enroll-now-button">Enroll Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="course-card">
+        <img src="images/ChatGPT Image May 11, 2025, 12_43_26 PM.png" alt="MLOps" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=MLOps';">
+        <div class="course-content">
+          <div>
+            <h3>MLOps</h3>
+            <p>Learn to deploy and manage machine learning models at scale using MLOps tools and best practices.</p>
+            <div class="course-price">₹5500</div>
+          </div>
+          <div class="course-buttons">
+            <a href="course-plan.html?id=2" class="course-plan-button">Course Plan</a>
+            <a href="#" class="enroll-now-button">Enroll Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="course-card">
+        <img src="images/dev.jpg" alt="DevOps" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=DevOps';">
+        <div class="course-content">
+          <div>
+            <h3>DevOps</h3>
+            <p>Master DevOps practices, including CI/CD pipelines, containerization with Docker, and orchestration with Kubernetes.</p>
+            <div class="course-price">₹10000</div>
+          </div>
+          <div class="course-buttons">
+            <a href="course-plan.html?id=1" class="course-plan-button">Course Plan</a>
+            <a href="#" class="enroll-now-button">Enroll Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="course-card">
+        <img src="images/cloud.jpg" alt="Cloud Computing" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=Cloud+Computing';">
+        <div class="course-content">
+          <div>
+            <h3>Cloud Computing</h3>
+            <p>Learn cloud architecture, deployment, and management using AWS, Azure, and Google Cloud with hands-on projects.</p>
+            <div class="course-price">₹8000</div>
+          </div>
+          <div class="course-buttons">
+            <a href="course-plan.html?id=10" class="course-plan-button">Course Plan</a>
+            <a href="#" class="enroll-now-button">Enroll Now</a>
+          </div>
         </div>
       </div>
     </div>
-    <div class="course-card">
-      <img src="images/ChatGPT Image Jun 24, 2025, 11_51_12 AM.png" alt="Machine Learning" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=Machine+Learning';">
-      <div class="course-content">
-        <div>
-          <h3>Machine Learning</h3>
-          <p>Explore algorithms, neural networks, and data modeling techniques to build predictive systems with tools like Scikit-learn and Keras.</p>
-          <div class="course-price">₹4500</div>
-        </div>
-        <div class="course-buttons">
-          <a href="course-plan.html?id=8" class="course-plan-button">Course Plan</a>
-          <a href="enroll.html?id=8" class="enroll-now-button">Enroll Now</a>
-        </div>
-      </div>
-    </div>
-    <div class="course-card">
-      <img src="images/ChatGPT Image May 11, 2025, 12_33_32 PM.png" alt="Complete AI Master Class" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=Complete+AI+Master+Class';">
-      <div class="course-content">
-        <div>
-          <h3>Complete AI Master Class</h3>
-          <p>A comprehensive course covering AI fundamentals, machine learning, generative AI, and agentic systems for a holistic AI education.</p>
-          <div class="course-price">₹12500</div>
-        </div>
-        <div class="course-buttons">
-          <a href="course-plan.html?id=9" class="course-plan-button">Course Plan</a>
-          <a href="enroll.html?id=9" class="enroll-now-button">Enroll Now</a>
-        </div>
-      </div>
-    </div>
-    <div class="course-card">
-      <img src="images/ChatGPT Image May 11, 2025, 12_16_24 PM.png" alt="Generative AI" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=Generative+AI';">
-      <div class="course-content">
-        <div>
-          <h3>Generative AI</h3>
-          <p>Build advanced generative models like GANs and LLMs to create innovative AI applications for creative industries.</p>
-          <div class="course-price">₹5000</div>
-        </div>
-        <div class="course-buttons">
-          <a href="course-plan.html?id=3" class="course-plan-button">Course Plan</a>
-          <a href="enroll.html?id=3" class="enroll-now-button">Enroll Now</a>
-        </div>
-      </div>
-    </div>
-    <div class="course-card">
-      <img src="images/agent.avif" alt="Agents AI" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=Agents+AI';">
-      <div class="course-content">
-        <div>
-          <h3>Agents AI</h3>
-          <p>Develop intelligent AI agents capable of autonomous decision-making and task automation.</p>
-          <div class="course-price">₹7000</div>
-        </div>
-        <div class="course-buttons">
-          <a href="course-plan.html?id=4" class="course-plan-button">Course Plan</a>
-          <a href="enroll.html?id=4" class="enroll-now-button">Enroll Now</a>
-        </div>
-      </div>
-    </div>
-    <div class="course-card">
-      <img src="images/ChatGPT Image Jun 24, 2025, 11_17_47 AM.png" alt="Frontend Development" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=Frontend+Development';">
-      <div class="course-content">
-        <div>
-          <h3>Frontend Development</h3>
-          <p>Design responsive, user-friendly web interfaces using modern frameworks like React, Vue.js, and Angular.</p>
-          <div class="course-price">₹5000</div>
-        </div>
-        <div class="course-buttons">
-          <a href="course-plan.html?id=6" class="course-plan-button">Course Plan</a>
-          <a href="enroll.html?id=6" class="enroll-now-button">Enroll Now</a>
-        </div>
-      </div>
-    </div>
-    <div class="course-card">
-      <img src="images/ChatGPT Image Jun 24, 2025, 11_25_58 AM.png" alt="Backend Development" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=Backend+Development';">
-      <div class="course-content">
-        <div>
-          <h3>Backend Development</h3>
-          <p>Develop scalable backend systems with Node.js, Django, and databases like MongoDB and PostgreSQL.</p>
-          <div class="course-price">₹6500</div>
-        </div>
-        <div class="course-buttons">
-          <a href="course-plan.html?id=7" class="course-plan-button">Course Plan</a>
-          <a href="enroll.html?id=7" class="enroll-now-button">Enroll Now</a>
-        </div>
-      </div>
-    </div>
-    <div class="course-card">
-      <img src="images/ChatGPT Image May 11, 2025, 12_43_26 PM.png" alt="MLOps" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=MLOps';">
-      <div class="course-content">
-        <div>
-          <h3>MLOps</h3>
-          <p>Learn to deploy and manage machine learning models at scale using MLOps tools and best practices.</p>
-          <div class="course-price">₹5500</div>
-        </div>
-        <div class="course-buttons">
-          <a href="course-plan.html?id=2" class="course-plan-button">Course Plan</a>
-          <a href="enroll.html?id=2" class="enroll-now-button">Enroll Now</a>
-        </div>
-      </div>
-    </div>
-    <div class="course-card">
-      <img src="images/dev.jpg" alt="DevOps" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=DevOps';">
-      <div class="course-content">
-        <div>
-          <h3>DevOps</h3>
-          <p>Master DevOps practices, including CI/CD pipelines, containerization with Docker, and orchestration with Kubernetes.</p>
-          <div class="course-price">₹10000</div>
-        </div>
-        <div class="course-buttons">
-          <a href="course-plan.html?id=1" class="course-plan-button">Course Plan</a>
-          <a href="enroll.html?id=1" class="enroll-now-button">Enroll Now</a>
-        </div>
-      </div>
-    </div>
-    <div class="course-card">
-      <img src="images/cloud.jpg" alt="Cloud Computing" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=Cloud+Computing';">
-      <div class="course-content">
-        <div>
-          <h3>Cloud Computing</h3>
-          <p>Learn cloud architecture, deployment, and management using AWS, Azure, and Google Cloud with hands-on projects.</p>
-          <div class="course-price">₹8000</div>
-        </div>
-        <div class="course-buttons">
-          <a href="course-plan.html?id=10" class="course-plan-button">Course Plan</a>
-          <a href="enroll.html?id=10" class="enroll-now-button">Enroll Now</a>
-        </div>
-      </div>
+  </section>
+
+  <!-- Enrollment Modal -->
+  <div class="modal" id="enroll-modal">
+    <div class="modal-content">
+      <span class="modal-close">×</span>
+      <h2>Enroll in Course</h2>
+      <form id="enroll-form">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required>
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+        <button type="submit">Submit Enrollment</button>
+      </form>
+      <p class="message" id="form-message"></p>
     </div>
   </div>
-</section>  <!-- Footer -->
+
+  <!-- Footer -->
   <footer>
     <div class="footer-content">
       <div class="footer-section">
@@ -662,10 +768,106 @@
     </div>
   </footer>
 
-  <!-- JavaScript for Hamburger Menu -->
+  <!-- JavaScript for Hamburger Menu and API Integration -->
   <script>
+    // Hamburger Menu
     document.querySelector('.hamburger').addEventListener('click', () => {
       document.querySelector('.nav-links').classList.toggle('active');
+    });
+
+    // Modal and API Integration
+    const modal = document.getElementById('enroll-modal');
+    const form = document.getElementById('enroll-form');
+    const message = document.getElementById('form-message');
+    const closeBtn = document.querySelector('.modal-close');
+    let selectedCourseName = ''; // Variable to store the selected course name
+
+    const enrollButtons = document.querySelectorAll('.enroll-now-button');
+    enrollButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        const courseCard = button.closest('.course-card');
+        const courseImage = courseCard.querySelector('.course-image');
+        selectedCourseName = courseImage ? courseImage.alt : 'Unknown Course';
+        modal.style.display = 'flex';
+      });
+    });
+
+    closeBtn.addEventListener('click', () => {
+      modal.style.display = 'none';
+      form.reset();
+      message.style.display = 'none';
+    });
+
+    window.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+        form.reset();
+        message.style.display = 'none';
+      }
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
+
+      // Debug payload
+      console.log('Sending payload:', { name, phone, email, course: selectedCourseName });
+
+      // Validate inputs
+      if (!selectedCourseName || selectedCourseName === 'Unknown Course') {
+        message.textContent = 'Course information is missing. Please try again.';
+        message.className = 'message error';
+        message.style.display = 'block';
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        message.textContent = 'Please enter a valid email address.';
+        message.className = 'message error';
+        message.style.display = 'block';
+        return;
+      }
+
+      const phoneRegex = /^\+?\d{10,15}$/;
+      if (!phoneRegex.test(phone)) {
+        message.textContent = 'Please enter a valid phone number (10-15 digits).';
+        message.className = 'message error';
+        message.style.display = 'block';
+        return;
+      }
+
+      try {
+        const response = await fetch('http://192.168.98.243:5000/apply', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, phone, email, course: selectedCourseName })
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+          message.textContent = `Thank you for enrolling in ${selectedCourseName}! We'll contact you soon.`;
+          message.className = 'message';
+          message.style.display = 'block';
+          form.reset();
+          setTimeout(() => {
+            modal.style.display = 'none';
+            message.style.display = 'none';
+          }, 2000);
+        } else {
+          message.textContent = data.error || 'Error submitting enrollment. Please try again.';
+          message.className = 'message error';
+          message.style.display = 'block';
+        }
+      } catch (error) {
+        console.error('Fetch error:', error);
+        message.textContent = 'Network error. Please check your connection and try again.';
+        message.className = 'message error';
+        message.style.display = 'block';
+      }
     });
   </script>
 </body>
