@@ -468,7 +468,7 @@
         top: 70px;
         left: 0;
         width: 100%;
-        background: white;
+        background: rgb(76, 90, 189);
         padding: 20px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         z-index: 1;
@@ -517,6 +517,20 @@
         height: 160px;
       }
     }
+    .logo img {
+  height: 60px;
+  width: 60px; /* make it square to allow perfect circle */
+  border-radius: 50%; /* make the logo round */
+  border: 2px solid #eee; /* optional: soft border */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* subtle shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect: pop and glow */
+.logo img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(255, 165, 0, 0.4); /* orange glow */
+}
   </style>
 </head>
 <body>
@@ -537,12 +551,13 @@
   <!-- Navigation -->
   <nav>
     <div class="logo">
-      <span role="img" aria-label="Rocket"></span> AceAI
+      <img src="images/logo (2).png" alt="AceAI Logo" style="margin-right: 12px;">
+      <span class="logo-text">AceAI</span>
     </div>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="courses.html" class="active">Courses</a></li>
-      <li><a href="internships.html">Internships</a></li>
+      <li><a href="index.html#internships">Internships</a></li>
     </ul>
     <div class="nav-buttons">
       <a href="#courses" class="btn-primary">Explore Courses</a>
@@ -630,7 +645,7 @@
         <img src="images/agent.avif" alt="Agents AI" class="course-image" onerror="this.onerror=null; this.src='https://via.placeholder.com/300x180?text=Agents+AI';">
         <div class="course-content">
           <div>
-            <h3>Agents AI</h3>
+            <h3>Agentics AI</h3>
             <p>Develop intelligent AI agents capable of autonomous decision-making and task automation.</p>
             <div class="course-price">₹7000</div>
           </div>
@@ -743,7 +758,8 @@
         <ul>
           <li><a href="index.html">Home</a></li>
           <li><a href="courses.html">Courses</a></li>
-          <li><a href="internships.html">Internships</a></li>
+          <li><a href="index.html#internships">Internships</a></li>
+
         </ul>
       </div>
       <div class="footer-section">

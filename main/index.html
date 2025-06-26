@@ -44,10 +44,32 @@
       gap: 12px;
     }
 
-    .logo img {
-      height: 40px;
-      width: auto;
-    }
+.logo img {
+  height: 60px;
+  width: 60px; /* make it square to allow perfect circle */
+  border-radius: 50%; /* make the logo round */
+  border: 2px solid #eee; /* optional: soft border */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* subtle shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Hover effect: pop and glow */
+.logo img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 20px rgba(255, 165, 0, 0.4); /* orange glow */
+}
+
+
+/* Keyframes for continuous rotation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 
     .logo-text {
       font-size: 1.5rem;
@@ -218,6 +240,20 @@
       transform: translateY(30px);
       animation: fadeSlideUp 1s ease-out 0.5s forwards;
     }
+.hero-content h1 {
+  color: #fff;
+  font-size: 3rem;
+  font-weight: bold;
+  transition: text-shadow 0.3s ease-in-out;
+}
+
+.hero-content h1:hover {
+  text-shadow:
+    1px 1px 2px orange,
+    -1px -1px 2px orange,
+    1px -1px 2px orange,
+    -1px 1px 2px orange;
+}
 
     .hero-content h1,
     .hero-content p,
@@ -1517,8 +1553,8 @@
           <h3>Contact</h3>
           <ul>
             <li><a href="mailto:info@aceai.io">info@aceai.io</a></li>
-            <li><a href="tel:+1234567890">+1 (234) 567-890</a></li>
-            <li>New York, NY</li>
+            <li><a href="tel:+1234567890">+91 9121564760</a></li>
+            <li>Chennai, Tamilnadu </li>
           </ul>
         </div>
       </div>
