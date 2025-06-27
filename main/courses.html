@@ -857,7 +857,7 @@
       }
 
       try {
-        const response = await fetch('http://192.168.98.243:5000/apply', {
+        const response = await fetch('https://api.aceai.in/api/enquiry/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ name, phone, email, course: selectedCourseName })
