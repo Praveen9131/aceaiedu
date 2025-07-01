@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Architecture - Aceai</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .back-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .course-hero {
+            padding: 120px 0 60px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            margin: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .greeting {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            opacity: 0;
+            color: #333;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+            animation: fadeInGreeting 1s ease-in-out forwards;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .greeting i {
+            color: #27ae60;
+            font-size: 1.8rem;
+        }
+
+        .course-title {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .course-meta {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            background: #f8f9fa;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+        }
+
+        .meta-item h4 {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .meta-item p {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .course-content {
+            padding: 60px 0;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 4rem;
+            margin-top: 2rem;
+        }
+
+        .modules-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .module-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .module-item {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+            transition: transform 0.3s ease;
+        }
+
+        .module-item:hover {
+            transform: translateX(10px);
+            border-color: #667eea;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .module-item h4 {
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .module-item ul {
+            list-style: none;
+            color: #555;
+        }
+
+        .module-item ul li::before {
+            content: "•";
+            color: #27ae60;
+            margin-right: 0.5rem;
+        }
+
+        .sidebar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            height: fit-content;
+            position: sticky;
+            top: 120px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .certificate-info {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            margin-bottom: 2rem;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .benefits {
+            list-style: none;
+        }
+
+        .benefits li {
+            padding: 0.8rem 0;
+            color: white;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            transition: opacity 0.3s ease;
+        }
+
+        .benefits li:hover {
+            opacity: 0.9;
+        }
+
+        .benefits li::before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 1.5rem;
+            margin-right: 0.8rem;
+        }
+
+        .why-enroll {
+            padding: 60px 0;
+            background: rgba(255, 255, 255, 0.95);
+        }
+
+        .why-enroll h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .reason-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            border: none;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .reason-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .reason-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: height 0.3s ease;
+        }
+
+        .reason-card:hover::before {
+            height: 8px;
+        }
+
+        .reason-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: #333;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .reason-card p {
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes fadeInGreeting {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .greeting {
+                font-size: 1.4rem;
+            }
+            .greeting i {
+                font-size: 1.4rem;
+            }
+            .course-title {
+                font-size: 2rem;
+            }
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            .course-meta {
+                flex-direction: column;
+                align-items: center;
+            }
+            .reasons-grid {
+                grid-template-columns: 1fr;
+            }
+            .certificate-info {
+                font-size: 1.5rem;
+            }
+            .benefits li {
+                font-size: 1rem;
+            }
+            .benefits li::before {
+                font-size: 1.2rem;
+            }
+            .reason-card {
+                padding: 1.5rem;
+            }
+            .reason-card h3 {
+                font-size: 1.4rem;
+            }
+            .reason-card p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">Aceai</a>
+            <a href="index.html#courses" class="back-btn">← Back to Courses</a>
+        </nav>
+    </header>
+
+    <section class="course-hero">
+        <div class="container">
+            <div class="greeting" id="greeting"><i class="fas fa-moon"></i><span></span></div>
+            <h1 class="course-title"><i class="fas fa-cloud"></i> Cloud Architecture</h1>
+            <div class="course-meta">
+                <div class="meta-item">
+                    <h4>Duration</h4>
+                    <p>12 weeks</p>
+                </div>
+                <div class="meta-item">
+                    <h4>Level</h4>
+                    <p>Intermediate to Advanced</p>
+                </div>
+                <div class="meta-item">
+                    <h4>Certificate</h4>
+                    <p>Included</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="course-content">
+        <div class="container">
+            <div class="content-grid">
+                <div class="modules-section">
+                    <h2>Course Plan</h2>
+                    <div class="module-list">
+                        <div class="module-item">
+                            <h4>Weeks 1-2: Introduction to Cloud Architecture</h4>
+                            <ul>
+                                <li>Overview of cloud computing models (IaaS, PaaS, SaaS)</li>
+                                <li>Key cloud providers: AWS, Azure, and GCP</li>
+                                <li>Project: Design a basic cloud architecture diagram</li>
+                            </ul>
+                        </div>
+                        <div class="module-item">
+                            <h4>Weeks 3-4: Scalability and Microservices</h4>
+                            <ul>
+                                <li>Designing scalable architectures with load balancers</li>
+                                <li>Implementing microservices with Docker and Kubernetes</li>
+                                <li>Project: Deploy a microservices-based app on AWS</li>
+                            </ul>
+                        </div>
+                        <div class="module-item">
+                            <h4>Weeks 5-6: Cloud Security and Compliance</h4>
+                            <ul>
+                                <li>Securing cloud environments with IAM and encryption</li>
+                                <li>Compliance frameworks (GDPR, HIPAA) in the cloud</li>
+                                <li>Project: Set up a secure VPC with security groups</li>
+                            </ul>
+                        </div>
+                        <div class="module-item">
+                            <h4>Weeks 7-8: Serverless and Event-Driven Architectures</h4>
+                            <ul>
+                                <li>Building serverless applications with AWS Lambda</li>
+                                <li>Event-driven design with message queues (SQS, EventBridge)</li>
+                                <li>Project: Create a serverless workflow for real-time data processing</li>
+                            </ul>
+                        </div>
+                        <div class="module-item">
+                            <h4>Weeks 9-10: Cost Optimization and Monitoring</h4>
+                            <ul>
+                                <li>Cost management strategies in the cloud</li>
+                                <li>Monitoring and logging with CloudWatch and Azure Monitor</li>
+                                <li>Project: Optimize a cloud deployment for cost efficiency</li>
+                            </ul>
+                        </div>
+                        <div class="module-item">
+                            <h4>Weeks 11-12: Capstone Project and Hybrid Cloud</h4>
+                            <ul>
+                                <li>Hybrid and multi-cloud architectures</li>
+                                <li>Design and deploy a full cloud architecture solution</li>
+                                <li>Present your project with a focus on scalability and security</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="sidebar">
+                    <div class="certificate-info">Certificate Included</div>
+                    <ul class="benefits">
+                        <li>Lifetime Access</li>
+                        <li>Certificate of Completion</li>
+                        <li>Job Placement Support</li>
+                        <li>Live Project Guidance</li>
+                        <li>Industry Expert Mentorship</li>
+                        <li>24/7 Community Support</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-enroll">
+        <div class="container">
+            <h2>Why Enroll in This Course?</h2>
+            <div class="reasons-grid">
+                <div class="reason-card">
+                    <h3>High-Demand Skills</h3>
+                    <p>Cloud architects are critical in today’s tech-driven world.</p>
+                </div>
+                <div class="reason-card">
+                    <h3>Career Growth</h3>
+                    <p>Advance your career with expertise in cloud design and management.</p>
+                </div>
+                <div class="reason-card">
+                    <h3>Hands-On Projects</h3>
+                    <p>Design and deploy real-world cloud solutions on AWS and Azure.</p>
+                </div>
+                <div class="reason-card">
+                    <h3>Scalability Focus</h3>
+                    <p>Learn to build efficient, secure, and scalable cloud architectures.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Function to display greeting based on time
+        function displayGreeting() {
+            const now = new Date();
+            const hours = now.getHours();
+            let greeting;
+
+            if (hours >= 0 && hours < 12) {
+                greeting = "Good Morning";
+            } else if (hours >= 12 && hours < 17) {
+                greeting = "Good Afternoon";
+            } else {
+                greeting = "Good Evening";
+            }
+
+            document.querySelector('#greeting span').textContent = greeting;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Display greeting on page load
+            displayGreeting();
+        });
+    </script>
+</body>
+</html>
