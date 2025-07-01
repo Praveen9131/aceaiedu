@@ -946,6 +946,7 @@
       .logo-text {
         font-size: 1.25rem;
       }
+      
 
       .hamburger {
         display: block;
@@ -1163,9 +1164,29 @@
         padding: 12px 16px;
       }
 
-      .logo img {
-        height: 32px;
-      }
+.logo img {
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 2px solid #eee;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.logo img:active,
+.logo img:focus {
+  transform: scale(0.95);
+}
+.logo img:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 20px rgba(255, 165, 0, 0.4);
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
 
       .logo-text {
         font-size: 1rem;
@@ -1618,7 +1639,7 @@
           </a>
         </li>
         <li>
-          <a href="https://www.youtube.com/yourchannel" target="_blank" aria-label="YouTube">
+          <a href="https://www.youtube.com/channel/UCbWu4fs8rVf-1aex9RFSScQ" target="_blank" aria-label="YouTube">
             <i class="fab fa-youtube"></i>
           </a>
         </li>
