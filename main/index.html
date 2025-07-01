@@ -1282,6 +1282,58 @@
         font-size: 0.875rem;
       }
     }
+    /* Footer Social Links */
+.social-links {
+  display: flex;
+  gap: 16px;
+  padding: 0;
+  justify-content: flex-start;
+}
+
+.social-links li {
+  margin-bottom: 0;
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: #94a3b8;
+  font-size: 20px;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  background: #8B5CF6;
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .social-links {
+    justify-content: center;
+  }
+
+  .social-links a {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .social-links a {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+}
   </style>
 </head>
 <body>
@@ -1526,33 +1578,57 @@
       </div>
     </section>
 
-    <footer>
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>About Us</h3>
-          <p>Empowering professionals with AI-driven education and real-world applications.</p>
-        </div>
-        <div class="footer-section">
-          <h3>Programs</h3>
-          <ul>
-            <li><a href="#training">Training</a></li>
-            <li><a href="#internships">Internships</a></li>
-            <li><a href="#workshops">Workshops</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Contact</h3>
-          <ul>
-            <li><a href="mailto:info@aceai.iin">info@aceai.in</a></li>
-            <li><a href="tel:+1234567890">+91 9121564760</a></li>
-            <li>Chennai, Tamilnadu </li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>© <span id="current-year"></span> AceAI. All rights reserved.</p>
-      </div>
-    </footer>
+    <!-- Add Font Awesome CDN in the <head> section if not already included -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!-- Updated Footer Section -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-section">
+      <h3>About Us</h3>
+      <p>Empowering professionals with AI-driven education and real-world applications.</p>
+    </div>
+    <div class="footer-section">
+      <h3>Programs</h3>
+      <ul>
+        <li><a href="#training">Training</a></li>
+        <li><a href="#internships">Internships</a></li>
+        <li><a href="#workshops">Workshops</a></li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>Contact</h3>
+      <ul>
+        <li><a href="mailto:info@aceai.iin">info@aceai.in</a></li>
+        <li><a href="tel:+1234567890">+91 9121564760</a></li>
+        <li>Chennai, Tamilnadu</li>
+      </ul>
+    </div>
+    <div class="footer-section">
+      <h3>Follow Us</h3>
+      <ul class="social-links">
+        <li>
+          <a href="https://www.instagram.com/yourprofile" target="_blank" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/yourprofile" target="_blank" aria-label="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.youtube.com/yourchannel" target="_blank" aria-label="YouTube">
+            <i class="fab fa-youtube"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© <span id="current-year"></span> AceAI. All rights reserved.</p>
+  </div>
+</footer>
 
     <div class="modal" id="apply-modal">
       <div class="modal-content">
