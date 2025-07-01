@@ -1,288 +1,762 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AceAI - AI Education Platform</title>
-  <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Enquiry Admin Panel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Login Styles */
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            width: 400px;
+        }
+
+        .login-title {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        /* Admin Panel Styles */
+        .admin-container {
+            display: none;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            margin: 20px;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 32px;
+            font-weight: 700;
+        }
+
+        .logout-btn {
+            padding: 10px 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: #c0392b;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .filter-group label {
+            font-size: 12px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .filter-group input, .filter-group select {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .print-btn, .export-btn {
+            padding: 10px 20px;
+            background: #27ae60;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            margin-left: auto;
+        }
+
+        .export-btn {
+            background: #3498db;
+            margin-left: 10px;
+        }
+
+        .print-btn:hover {
+            background: #219a52;
+        }
+
+        .export-btn:hover {
+            background: #2980b9;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .stat-card h3 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .stat-card p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        /* Filter Results Display */
+        .filter-results {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-results h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .filter-results p {
+            font-size: 14px;
+            opacity: 0.9;
+            margin: 0;
+        }
+
+        .results-count {
+            font-size: 24px;
+            font-weight: bold;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin-left: auto;
+        }
+
+        .table-container {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #f8f9fa;
+            padding: 15px 12px;
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+            border-bottom: 2px solid #e9ecef;
+            position: sticky;
+            top: 0;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        th:hover {
+            background: #e9ecef;
+        }
+
+        td {
+            padding: 12px;
+            border-bottom: 1px solid #e9ecef;
+            color: #555;
+        }
+
+        tr:hover {
+            background: #f8f9fa;
+        }
+
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .status-inactive {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: #666;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 50px;
+            color: #999;
+        }
+
+        /* Print Styles */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .print-area, .print-area * {
+                visibility: visible;
+            }
+            .print-area {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+            .controls, .print-btn, .export-btn, .logout-btn {
+                display: none !important;
+            }
+            .admin-container {
+                margin: 0;
+                box-shadow: none;
+                border-radius: 0;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+            }
+            
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .filter-results h3 {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+            
+            table {
+                font-size: 14px;
+            }
+            
+            th, td {
+                padding: 8px 6px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="top-banner">
-    🚀 AceAI Advanced AI Training Programs Now Available - Join thousands of students mastering AI
-  </div>
-
-  <nav class="navigation">
-    <div class="logo">AceAI</div>
-    <ul class="nav-links">
-      <li><a href="#programs" class="dropdown">Programs</a></li>
-      <li><a href="#internships">Internships</a></li>
-      <li><a href="#workshops">Workshops</a></li>
-    </ul>
-    <div class="nav-buttons">
-      <a href="/auth?type=login" class="btn-login">LOG IN</a>
-      <a href="/auth?type=register" class="btn-register">REGISTER</a>
-      <a href="/auth?type=register" class="btn-primary">GET STARTED</a>
-    </div>
-  </nav>
-
-  <section class="hero">
-    <div class="hero-shapes">
-      <div class="shape-3d"></div>
-      <div class="shape-3d"></div>
-      <div class="shape-3d"></div>
-      <div class="shape-3d"></div>
-    </div>
-    <div class="hero-content">
-      <h1>Learn AI with AceAI</h1>
-      <p>Master cutting-edge AI technologies through our comprehensive training programs and hands-on internships. Start your journey to academic and professional excellence today.</p>
-      <a href="#programs" class="hero-cta">EXPLORE PROGRAMS</a>
-    </div>
-  </section>
-
-  <section class="vibecoding-section-new">
-    <div class="geometric-shapes">
-      <div class="shape shape-1"></div>
-      <div class="shape shape-2"></div>
-      <div class="shape shape-3"></div>
-      <div class="shape shape-4"></div>
-      <div class="shape shape-5"></div>
-      <div class="shape shape-6"></div>
+    <!-- Login Screen -->
+    <div id="loginContainer" class="login-container">
+        <div class="login-card">
+            <h2 class="login-title">🎓 Admin Login</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <button type="submit" class="login-btn">Login</button>
+                <div id="errorMessage" class="error-message"></div>
+            </form>
+            <div style="margin-top: 20px; padding: 15px; background: #e8f4fd; border-radius: 8px; font-size: 12px; color: #31708f;">
+                <strong>Demo Credentials:</strong><br>
+                Username: admin<br>
+                Password: admin123
+            </div>
+        </div>
     </div>
 
-    <div class="vibecoding-container-new">
-      <div class="vibecoding-header">
-        <h2>Industry-Level AI.<br>Master Generative AI.</h2>
-      </div>
-
-      <div class="vibecoding-subtitle">
-        <p>Empowering professionals with cutting-edge AI skills</p>
-      </div>
-
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
-              <path d="M9 9h6v6H9z" stroke="currentColor" stroke-width="2"/>
-            </svg>
-          </div>
-          <div class="feature-content">
-            <h3>Hands-on AI projects</h3>
-            <p>Build real-world applications</p>
-          </div>
+    <!-- Admin Panel -->
+    <div id="adminContainer" class="admin-container">
+        <div class="header">
+            <h1>🎓 Student Enquiry Management</h1>
+            <button class="logout-btn" onclick="logout()">Logout</button>
         </div>
 
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" stroke="currentColor" stroke-width="2"/>
-            </svg>
-          </div>
-          <div class="feature-content">
-            <h3>Generative AI expertise</h3>
-            <p>Master models like GANs and LLMs</p>
-          </div>
+        <div class="stats">
+            <div class="stat-card">
+                <h3 id="totalEnquiries">0</h3>
+                <p>Total Enquiries</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="activeEnquiries">0</h3>
+                <p>Active Enquiries</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="pythonEnquiries">0</h3>
+                <p>Python Course Interest</p>
+            </div>
+            <div class="stat-card">
+                <h3 id="todayEnquiries">0</h3>
+                <p>Today's Enquiries</p>
+            </div>
         </div>
 
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2"/>
-              <circle cx="9" cy="7" r="4" stroke="currentColor" stroke-width="2"/>
-              <path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke="currentColor" stroke-width="2"/>
-            </svg>
-          </div>
-          <div class="feature-content">
-            <h3>Collaborative learning</h3>
-            <p>Work with industry experts</p>
-          </div>
+        <div class="controls">
+            <div class="filter-group">
+                <label>Search Name</label>
+                <input type="text" id="searchName" placeholder="Search by name..." onkeyup="filterData()">
+            </div>
+            <div class="filter-group">
+                <label>Search Email</label>
+                <input type="text" id="searchEmail" placeholder="Search by email..." onkeyup="filterData()">
+            </div>
+            <div class="filter-group">
+                <label>Course Filter</label>
+                <select id="courseFilter" onchange="filterData()">
+                    <option value="">All Courses</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Status Filter</label>
+                <select id="statusFilter" onchange="filterData()">
+                    <option value="">All Status</option>
+                    <option value="1">Active</option>
+                    <option value="0">Inactive</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Date From</label>
+                <input type="date" id="dateFrom" onchange="filterData()">
+            </div>
+            <div class="filter-group">
+                <label>Date To</label>
+                <input type="date" id="dateTo" onchange="filterData()">
+            </div>
+            <button class="print-btn" onclick="printTable()">🖨️ Print</button>
+            <button class="export-btn" onclick="exportToCSV()">📊 Export CSV</button>
         </div>
 
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M14.828 14.828a4 4 0 0 1-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0z" stroke="currentColor" stroke-width="2"/>
-            </svg>
-          </div>
-          <div class="feature-content">
-            <h3>Ethical AI practices</h3>
-            <p>Ensure compliance and fairness</p>
-          </div>
+        <!-- Filter Results Display -->
+        <div id="filterResults" class="filter-results">
+            <h3>
+                📊 Filtered Results
+                <span class="results-count" id="filteredCount">0</span>
+            </h3>
+            <p id="filterDescription">Showing all records</p>
         </div>
 
-        <div class="feature-card">
-          <div class="feature-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" stroke="currentColor" stroke-width="2"/>
-            </svg>
-          </div>
-          <div class="feature-content">
-            <h3>Cloud-based AI tools</h3>
-            <p>Deploy on AWS and GCP</p>
-          </div>
+        <div class="print-area">
+            <div class="table-container">
+                <div id="loading" class="loading">Loading student data...</div>
+                <table id="dataTable" style="display: none;">
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable(0)">ID ↕️</th>
+                            <th onclick="sortTable(1)">Full Name ↕️</th>
+                            <th onclick="sortTable(2)">Email ↕️</th>
+                            <th onclick="sortTable(3)">Phone ↕️</th>
+                            <th onclick="sortTable(4)">Interest ↕️</th>
+                            <th onclick="sortTable(5)">Message ↕️</th>
+                            <th onclick="sortTable(6)">Status ↕️</th>
+                            <th onclick="sortTable(7)">Created Date ↕️</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                </table>
+                <div id="noData" class="no-data" style="display: none;">
+                    No data found matching your filters.
+                </div>
+            </div>
         </div>
-      </div>
-
-      <div class="vibecoding-cta-container">
-        <a href="#vibecoding-signup" class="vibecoding-cta-new">
-          Start Learning AI
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <section class="internships-section" id="internships">
-    <div class="background-shapes">
-      <div class="background-box"></div>
-      <div class="background-box"></div>
-      <div class="background-box"></div>
-      <div class="background-box"></div>
-    </div>
-    <h2>Explore Our Internships</h2>
-    <div class="internships-content">
-      <div class="internship-card">
-        <h3>AI Research Internship</h3>
-        <p>Work on cutting-edge projects in Generative AI and Deep Learning. Collaborate with industry experts and gain hands-on experience in advancing AI technologies.</p>
-        <a href="#apply-research">Apply Now</a>
-      </div>
-      <div class="internship-card">
-        <h3>Data Science Internship</h3>
-        <p>Receive practical training in data analysis, machine learning, and AI model deployment. Ideal for students aiming to build a career in data science with real-world applications.</p>
-        <a href="#apply-datascience">Apply Now</a>
-      </div>
-      <div class="internship-card">
-        <h3>AI Development Internship</h3>
-        <p>Develop real-world AI applications by working on live projects. Learn from mentors and enhance your technical skills in building AI-driven solutions.</p>
-        <a href="#apply-development">Apply Now</a>
-      </div>
-      <div class="internship-card">
-        <h3>Machine Learning Internship</h3>
-        <p>Dive into machine learning algorithms and their applications. Work on projects that involve predictive modeling, natural language processing, and more.</p>
-        <a href="#apply-ml">Apply Now</a>
-      </div>
-      <div class="internship-card">
-        <h3>AI Ethics Internship</h3>
-        <p>Explore the ethical implications of AI development. Contribute to projects focused on responsible AI practices and policy development.</p>
-        <a href="#apply-ethics">Apply Now</a>
-      </div>
-      <div class="internship-card">
-        <h3>AI in Healthcare Internship</h3>
-        <p>Apply AI to healthcare challenges, working on projects like medical imaging analysis and predictive diagnostics. Gain insights into AI's role in improving patient outcomes.</p>
-        <a href="#apply-healthcare">Apply Now</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="workshops-section" id="workshops">
-    <div class="background-shapes">
-      <div class="background-box"></div>
-      <div class="background-box"></div>
-      <div class="background-box"></div>
-      <div class="background-box"></div>
-    </div>
-    <div class="workshops-container">
-      <div class="workshops-visual">
-        <div class="workshops-card-3d">
-          <ul class="workshops-list">
-            <li>🎓 Interactive AI workshops</li>
-            <li>🖥️ Hands-on expert sessions</li>
-            <li>📚 Latest AI trends</li>
-            <li>🤝 Network with pros</li>
-            <li>🚀 Build practical skills</li>
-            <li>🌟 Cutting-edge tools</li>
-            <li>📈 Boost your career</li>
-          </ul>
-        </div>
-      </div>
-      <div class="workshops-content">
-        <div class="workshops-badge">WORKSHOPS</div>
-        <h2>Explore AI Workshops</h2>
-        <p>Dive into AceAI's interactive AI workshops led by industry experts. Gain hands-on experience, master the latest AI trends, and network with professionals. Access cutting-edge tools and build practical skills to accelerate your AI career.</p>
-        <a href="#workshops-signup" class="workshops-cta">Start Learning</a>
-      </div>
-    </div>
-  </section>
-
-  <section class="final-hero">
-    <div class="final-hero-content">
-      <h2>Learn. Master. Excel.</h2>
-      <p>Build and master AI skills with the fastest learning platform for academic excellence.</p>
-      <div class="final-hero-buttons">
-        <a href="#start" class="btn-primary">GET STARTED</a>
-        <a href="#contact" class="btn-secondary">CONTACT US</a>
-      </div>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <div class="footer-content">
-      <div class="footer-section company-info">
-        <h3>AceAI</h3>
-        <p>
-          Empowering the future with industry-leading AI and Generative AI education. 
-          We bridge the gap between academic knowledge and real-world applications.
-        </p>
-      </div>
-
-      <div class="footer-section">
-        <h3>Programs</h3>
-        <ul>
-          <li><a href="/institutional-training">Institutional Training</a></li>
-          <li><a href="/individual-learning">Individual Learning</a></li>
-          <li><a href="/internships">Internship Programs</a></li>
-          <li><a href="/workshops">Workshop Series</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-section">
-        <h3>Legal</h3>
-        <ul>
-          <li><a href="/privacy-policy">Privacy Policy</a></li>
-          <li><a href="/terms-of-service">Terms of Service</a></li>
-          <li><a href="/cookie-policy">Cookie Policy</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-section">
-        <h3>Contact Us</h3>
-        <ul>
-          <li><a href="mailto:info@aceai.com">info@aceai.com</a></li>
-          <li><a href="tel:+9121564760">+91 9121564760</a></li>
-          <li>chennai, Tamilnadu,India</li>
-        </ul>
-      </div>
     </div>
 
-    <div class="footer-bottom">
-      <p>© <span id="current-year"></span> AceAI. All rights reserved. Academic Excellence with AI.</p>
-    </div>
-  </footer>
-
-  <script>
-    // Set current year in footer
-    document.getElementById('current-year').textContent = new Date().getFullYear();
-    
-    // Add tilt effect to cards (replacement for react-tilt)
-    document.querySelectorAll('.internship-card, .workshops-card-3d').forEach(card => {
-      card.addEventListener('mousemove', (e) => {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const centerX = rect.width / 2;
-        const centerY = rect.height / 2;
-        const angleX = (y - centerY) / 20;
-        const angleY = (centerX - x) / 20;
+    <script>
+        // Predefined credentials
+        const ADMIN_USERNAME = 'admin';
+        const ADMIN_PASSWORD = 'admin123';
         
-        card.style.transform = `perspective(1000px) rotateX(${angleX}deg) rotateY(${angleY}deg) scale(1.02)`;
-        card.style.transition = 'transform 0.1s ease';
-      });
-      
-      card.addEventListener('mouseleave', () => {
-        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
-        card.style.transition = 'transform 0.5s ease';
-      });
-    });
-  </script>
+        let originalData = [];
+        let filteredData = [];
+        let sortColumn = -1;
+        let sortDirection = 1;
+
+        // Login functionality
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+                document.getElementById('loginContainer').style.display = 'none';
+                document.getElementById('adminContainer').style.display = 'block';
+                loadData();
+            } else {
+                document.getElementById('errorMessage').textContent = 'Invalid username or password';
+            }
+        });
+
+        // Logout functionality
+        function logout() {
+            document.getElementById('loginContainer').style.display = 'flex';
+            document.getElementById('adminContainer').style.display = 'none';
+            document.getElementById('loginForm').reset();
+            document.getElementById('errorMessage').textContent = '';
+        }
+
+        // Load data from API
+        async function loadData() {
+            try {
+                const response = await fetch('https://api.aceai.in/api/enquirydata/?');
+                const result = await response.json();
+                originalData = result.data || [];
+                filteredData = [...originalData];
+                
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('dataTable').style.display = 'table';
+                
+                updateStats();
+                populateCourseFilter();
+                updateFilterResults();
+                populateTable();
+            } catch (error) {
+                console.error('Error loading data:', error);
+                document.getElementById('loading').innerHTML = 'Error loading data. Please try again.';
+            }
+        }
+
+        // Populate course filter dynamically
+        function populateCourseFilter() {
+            const courseSet = new Set();
+            
+            originalData.forEach(item => {
+                if (item.interested_in && item.interested_in.trim()) {
+                    courseSet.add(item.interested_in.trim());
+                }
+            });
+            
+            const courseFilter = document.getElementById('courseFilter');
+            // Clear existing options except "All Courses"
+            courseFilter.innerHTML = '<option value="">All Courses</option>';
+            
+            // Sort courses alphabetically and add to filter
+            const sortedCourses = Array.from(courseSet).sort();
+            sortedCourses.forEach(course => {
+                const option = document.createElement('option');
+                option.value = course;
+                option.textContent = course;
+                courseFilter.appendChild(option);
+            });
+        }
+
+        // Update filter results display
+        function updateFilterResults() {
+            const filteredCountEl = document.getElementById('filteredCount');
+            const filterDescriptionEl = document.getElementById('filterDescription');
+            
+            filteredCountEl.textContent = filteredData.length;
+            
+            // Build description of active filters
+            const activeFilters = [];
+            
+            const searchName = document.getElementById('searchName').value;
+            const searchEmail = document.getElementById('searchEmail').value;
+            const courseFilter = document.getElementById('courseFilter').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+            const dateFrom = document.getElementById('dateFrom').value;
+            const dateTo = document.getElementById('dateTo').value;
+            
+            if (searchName) activeFilters.push(`Name: "${searchName}"`);
+            if (searchEmail) activeFilters.push(`Email: "${searchEmail}"`);
+            if (courseFilter) activeFilters.push(`Course: "${courseFilter}"`);
+            if (statusFilter) activeFilters.push(`Status: ${statusFilter === '1' ? 'Active' : 'Inactive'}`);
+            if (dateFrom) activeFilters.push(`From: ${new Date(dateFrom).toLocaleDateString()}`);
+            if (dateTo) activeFilters.push(`To: ${new Date(dateTo).toLocaleDateString()}`);
+            
+            if (activeFilters.length > 0) {
+                filterDescriptionEl.textContent = `Filtered by: ${activeFilters.join(', ')}`;
+            } else {
+                filterDescriptionEl.textContent = `Showing all ${originalData.length} records`;
+            }
+        }
+
+        // Update statistics
+        function updateStats() {
+            const total = originalData.length;
+            const active = originalData.filter(item => item.status === 1).length;
+            const python = originalData.filter(item => 
+                item.interested_in && item.interested_in.toLowerCase().includes('python')
+            ).length;
+            const today = originalData.filter(item => {
+                const itemDate = new Date(item.created_at).toDateString();
+                const todayDate = new Date().toDateString();
+                return itemDate === todayDate;
+            }).length;
+
+            document.getElementById('totalEnquiries').textContent = total;
+            document.getElementById('activeEnquiries').textContent = active;
+            document.getElementById('pythonEnquiries').textContent = python;
+            document.getElementById('todayEnquiries').textContent = today;
+        }
+
+        // Populate table with data
+        function populateTable() {
+            const tbody = document.getElementById('tableBody');
+            const noData = document.getElementById('noData');
+            
+            if (filteredData.length === 0) {
+                tbody.innerHTML = '';
+                noData.style.display = 'block';
+                return;
+            }
+            
+            noData.style.display = 'none';
+            
+            const rows = filteredData.map(item => `
+                <tr>
+                    <td>${item.enquiry_id}</td>
+                    <td>${item.full_name || 'N/A'}</td>
+                    <td>${item.email || 'N/A'}</td>
+                    <td>${item.phone || 'N/A'}</td>
+                    <td>${item.interested_in || 'N/A'}</td>
+                    <td>${item.enquiry_message || 'N/A'}</td>
+                    <td><span class="${item.status === 1 ? 'status-active' : 'status-inactive'}">
+                        ${item.status === 1 ? 'Active' : 'Inactive'}
+                    </span></td>
+                    <td>${new Date(item.created_at).toLocaleDateString()} ${new Date(item.created_at).toLocaleTimeString()}</td>
+                </tr>
+            `).join('');
+            
+            tbody.innerHTML = rows;
+        }
+
+        // Filter data based on inputs
+        function filterData() {
+            const searchName = document.getElementById('searchName').value.toLowerCase();
+            const searchEmail = document.getElementById('searchEmail').value.toLowerCase();
+            const courseFilter = document.getElementById('courseFilter').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+            const dateFrom = document.getElementById('dateFrom').value;
+            const dateTo = document.getElementById('dateTo').value;
+
+            filteredData = originalData.filter(item => {
+                const matchName = !searchName || (item.full_name && item.full_name.toLowerCase().includes(searchName));
+                const matchEmail = !searchEmail || (item.email && item.email.toLowerCase().includes(searchEmail));
+                const matchCourse = !courseFilter || (item.interested_in && item.interested_in.includes(courseFilter));
+                const matchStatus = !statusFilter || item.status.toString() === statusFilter;
+                
+                let matchDate = true;
+                if (dateFrom || dateTo) {
+                    const itemDate = new Date(item.created_at).setHours(0,0,0,0);
+                    if (dateFrom) {
+                        const fromDate = new Date(dateFrom).setHours(0,0,0,0);
+                        matchDate = matchDate && itemDate >= fromDate;
+                    }
+                    if (dateTo) {
+                        const toDate = new Date(dateTo).setHours(23,59,59,999);
+                        matchDate = matchDate && itemDate <= toDate;
+                    }
+                }
+
+                return matchName && matchEmail && matchCourse && matchStatus && matchDate;
+            });
+
+            updateFilterResults();
+            populateTable();
+        }
+
+        // Sort table by column
+        function sortTable(columnIndex) {
+            if (sortColumn === columnIndex) {
+                sortDirection *= -1;
+            } else {
+                sortColumn = columnIndex;
+                sortDirection = 1;
+            }
+
+            filteredData.sort((a, b) => {
+                let valueA, valueB;
+                
+                switch(columnIndex) {
+                    case 0: valueA = a.enquiry_id; valueB = b.enquiry_id; break;
+                    case 1: valueA = a.full_name || ''; valueB = b.full_name || ''; break;
+                    case 2: valueA = a.email || ''; valueB = b.email || ''; break;
+                    case 3: valueA = a.phone || ''; valueB = b.phone || ''; break;
+                    case 4: valueA = a.interested_in || ''; valueB = b.interested_in || ''; break;
+                    case 5: valueA = a.enquiry_message || ''; valueB = b.enquiry_message || ''; break;
+                    case 6: valueA = a.status; valueB = b.status; break;
+                    case 7: valueA = new Date(a.created_at); valueB = new Date(b.created_at); break;
+                    default: return 0;
+                }
+
+                if (typeof valueA === 'string') {
+                    return valueA.localeCompare(valueB) * sortDirection;
+                }
+                return (valueA - valueB) * sortDirection;
+            });
+
+            populateTable();
+        }
+
+        // Print functionality
+        function printTable() {
+            window.print();
+        }
+
+        // Export to CSV
+        function exportToCSV() {
+            const headers = ['ID', 'Full Name', 'Email', 'Phone', 'Interest', 'Message', 'Status', 'Created Date'];
+            const csvContent = [
+                headers.join(','),
+                ...filteredData.map(item => [
+                    item.enquiry_id,
+                    `"${item.full_name || 'N/A'}"`,
+                    `"${item.email || 'N/A'}"`,
+                    `"${item.phone || 'N/A'}"`,
+                    `"${item.interested_in || 'N/A'}"`,
+                    `"${item.enquiry_message || 'N/A'}"`,
+                    item.status === 1 ? 'Active' : 'Inactive',
+                    `"${new Date(item.created_at).toLocaleString()}"`
+                ].join(','))
+            ].join('\n');
+
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `student_enquiries_${new Date().toISOString().split('T')[0]}.csv`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Auto-refresh data every 5 minutes
+        setInterval(() => {
+            if (document.getElementById('adminContainer').style.display !== 'none') {
+                loadData();
+            }
+        }, 300000);
+    </script>
 </body>
 </html>
